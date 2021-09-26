@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class AlertRabbitTest {
-    @Rule
+ /*   @Rule
     public TemporaryFolder folder = new TemporaryFolder();
 
     @Test
@@ -22,5 +22,5 @@ public class AlertRabbitTest {
             out.println("rabbit.interval=1");
         }
         assertThat(AlertRabbit.getTime(source), is(1));
-    }
+    }*/
 }

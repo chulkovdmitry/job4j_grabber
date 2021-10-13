@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Post {
 
-    private int id = Statement.RETURN_GENERATED_KEYS;
+    private int id;
 
     private String title;
 

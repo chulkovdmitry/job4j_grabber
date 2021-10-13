@@ -25,12 +25,9 @@ public class SqlRuParse implements Parse {
                     continue;
                 }
                 Post post = new Post();
-                post.setId(Statement.RETURN_GENERATED_KEYS);
                 System.out.println(post.getId());
                 post.setTitle(ed.child(0).text());
-
                 post.setLink(ed.child(0).attr("href"));
-
                 SqlRuDateTimeParser sql = new SqlRuDateTimeParser();
                 LocalDateTime date = sql.parse(ed.parent().children().get(5).text());
                 post.setCreated(date);

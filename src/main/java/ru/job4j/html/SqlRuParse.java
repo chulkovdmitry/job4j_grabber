@@ -8,8 +8,6 @@ import ru.job4j.grabber.Post;
 import ru.job4j.grabber.utils.DateTimeParser;
 import ru.job4j.grabber.utils.Parse;
 import ru.job4j.grabber.utils.SqlRuDateTimeParser;
-import java.sql.Statement;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +26,6 @@ public class SqlRuParse implements Parse {
             Document doc = Jsoup.connect(link).get();
             Elements row = doc.select(".postslisttopic");
             for (Element el : row) {
-                if (el.text().contains("Важно")) {
-                    continue;
-                }
                 rsl.add(detail(el.children().attr("href")));
             }
         } catch (Exception e) {

@@ -14,18 +14,19 @@ import java.util.Properties;
 public class PsqlStore implements Store, AutoCloseable {
     private final Connection cnn;
 
+    public PsqlStore(Connection cnn) {
+        this.cnn = cnn;
+    }
+
     public PsqlStore(Properties cfg) throws SQLException {
-        try (InputStream in = PsqlStore.class.getClassLoader().getResourceAsStream("app.properties")) {
-            cfg.load(in);
+        try {
             Class.forName(cfg.getProperty("jdbc.driver"));
-        } catch (ClassNotFoundException | IOException e) {
-            System.out.println("Ошибка в методе PsqlStore"); e.printStackTrace();
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
-        cnn = DriverManager.getConnection(
-                cfg.getProperty("url"),
+        cnn = DriverManager.getConnection(cfg.getProperty("url"),
                 cfg.getProperty("username"),
-                cfg.getProperty("password")
-        );
+                cfg.getProperty("password"));
     }
 
     @Override
@@ -53,15 +54,14 @@ public class PsqlStore implements Store, AutoCloseable {
         List<Post> rsl = new ArrayList<>();
         try (PreparedStatement ps = cnn.prepareStatement("select * from post")) {
             try (ResultSet resultSet = ps.executeQuery()) {
-
                 while (resultSet.next()) {
-                    Post post = new Post();
-                    post.setId(resultSet.getInt("id"));
-                    post.setTitle(resultSet.getString("name"));
-                    post.setDescription(resultSet.getString("text"));
-                    post.setLink(resultSet.getString("link"));
-                    post.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
-                    rsl.add(post);
+                    rsl.add(new Post(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getString("text"),
+                            resultSet.getString("link"),
+                            resultSet.getTimestamp("created").toLocalDateTime()
+                    ));
                 }
             }
         } catch (SQLException throwables) {
@@ -101,10 +101,15 @@ public class PsqlStore implements Store, AutoCloseable {
     public static void main(String[] args) throws SQLException {
         SqlRuParse sqlRuParse = new SqlRuParse(new SqlRuDateTimeParser());
         Post post = sqlRuParse.detail("https://www.sql.ru/forum/1338405/vakansiya-sistemnyy-analitik");
-        Properties properties = new Properties();
-        PsqlStore psqlStore = new PsqlStore(properties);
-        psqlStore.save(post);
-        System.out.println(psqlStore.findById(1));
-        System.out.println(psqlStore.getAll());
+        Properties cfg = new Properties();
+        try (InputStream in = PsqlStore.class.getClassLoader().getResourceAsStream("app.properties")) {
+            cfg.load(in);
+            PsqlStore psqlStore = new PsqlStore(cfg);
+            psqlStore.save(post);
+            System.out.println(psqlStore.findById(1));
+            System.out.println(psqlStore.getAll());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

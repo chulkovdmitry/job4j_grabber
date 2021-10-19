@@ -60,14 +60,12 @@ public class Grabber implements Grab {
             JobDataMap map = context.getJobDetail().getJobDataMap();
             Store store = (Store) map.get("store");
             Parse parse = (Parse) map.get("parse");
-            List<Post> exp = new ArrayList<>();
-            int i = 0;
-            while (i < 6) {
-                String url = "https://www.sql.ru/forum/job-offers/" + i++;
-                exp.addAll(parse.list(url));
-            }
-            for (Post post : exp) {
-                store.save(post);
+            List<Post> exp = null;
+            exp = parse.list("https://www.sql.ru/forum/job-offers");
+            if (exp != null) {
+                for (int i = 0; i < exp.size(); i++) {
+                    store.save(exp.get(i));
+                }
             }
         }
     }

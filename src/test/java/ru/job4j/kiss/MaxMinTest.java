@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class MaxMinTest {
 
     @Test
-    public void Max() {
+    public void whenMax() {
         MaxMin max = new MaxMin();
         List<Integer> list = List.of(7, 12, 23, 16, 52, 50);
         Comparator<Integer> comparator = Integer::compareTo;
@@ -20,7 +20,7 @@ public class MaxMinTest {
     }
 
     @Test
-    public void Min() {
+    public void whenMin() {
         MaxMin min = new MaxMin();
         List<Integer> list = List.of(64, 45, 3, 5);
         Comparator<Integer> comparator = Integer::compareTo;
@@ -29,7 +29,7 @@ public class MaxMinTest {
     }
 
     @Test
-    public void MaxTwo() {
+    public void whenMaxTwo() {
         List<String> rsl = List.of("Boney M", "Abba", "AC DC", "Depeche Mode", "Foreigner");
         MaxMin maxMin = new MaxMin();
         Comparator<String> cmp = new Comparator<String>() {
@@ -42,7 +42,7 @@ public class MaxMinTest {
     }
 
     @Test
-    public void MinTwo() {
+    public void whenMinTwo() {
         List<String> rsl = List.of("Boney M", "Abba", "AC DC", "Depeche Mode", "Foreigner");
         MaxMin maxMin = new MaxMin();
         Comparator<String> cmp = new Comparator<String>() {

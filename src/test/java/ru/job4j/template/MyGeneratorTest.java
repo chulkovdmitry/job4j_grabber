@@ -38,6 +38,7 @@ public class MyGeneratorTest {
         args.put("subject", "you");
         args.put("age", "28");
         String rsl = gen.produce("I am a ${name}, Who are ${subject}? ", args);
-        Assert.assertEquals(rsl, "I am a Petr, Who are you? ");
+        Assert.assertNotEquals(rsl, "I am a Pavel, Who are you? ");
     }
+
 }

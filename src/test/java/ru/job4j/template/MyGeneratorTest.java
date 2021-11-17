@@ -37,6 +37,7 @@ public class MyGeneratorTest {
         Generator gen = new MyGenerator();
         Map<String, String> args = new HashMap<>();
         args.put("name", "Petr");
-        gen.produce("${nam}", args);
+        String rsl = gen.produce("{name}", args);
+        Assert.assertEquals(rsl, "{name}");
     }
 }

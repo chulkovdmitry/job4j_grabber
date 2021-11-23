@@ -1,13 +1,5 @@
 package ru.job4j.ood.lsp;
 
-/**
- * 0. Принцип подстановки Лисков. [#4915]
- * @author chulkovdv
- * @version 1.0
- * @since 23.11.2021
- * нарушаем принципы Лисков
- */
-
 public class Cinema {
     public void filmLang(Object obj) {
         if (obj instanceof RusCinema) {

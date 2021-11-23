@@ -15,7 +15,6 @@ class AutoTransport {
         if (fuel < 0) {
             throw new IllegalArgumentException("Need more fuel!");
         }
-        // other logic
     }
 
 }

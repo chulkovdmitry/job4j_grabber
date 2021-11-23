@@ -27,7 +27,6 @@ class PhoneNumber {
     }
 }
 
-// абонент
 class Subscriber {
 
     protected PhoneNumber phoneNumber;
@@ -67,8 +66,6 @@ class SomeOperatorSubscriber extends Subscriber {
 
     @Override
     public void setPhoneNumber(PhoneNumber phoneNumber) {
-        // some specific logic;
-        // Забыли сделать проверку. Возможно не валидное состояние
         this.phoneNumber = phoneNumber;
     }
 }

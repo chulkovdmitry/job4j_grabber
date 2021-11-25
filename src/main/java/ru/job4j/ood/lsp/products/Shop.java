@@ -26,6 +26,7 @@ public class Shop implements Storage {
             return true;
         } else if (fresh < 100 && fresh >= 75) {
             food.setDiscount(25);
+            food.setPrice(food.getPrice() * 0.75);
             foods.add(food);
             return true;
         }

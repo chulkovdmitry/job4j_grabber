@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Trash implements Storage {
-    List<Food> foods = new ArrayList<>();
+    private List<Food> foods = new ArrayList<>();
     @Override
     public List<Food> getList() {
         return foods;
@@ -16,6 +16,7 @@ public class Trash implements Storage {
             System.out.println("Продукт годен к продаже");
             return false;
         }
+        foods.add(food);
         return true;
     }
 }

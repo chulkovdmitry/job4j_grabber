@@ -1,6 +1,7 @@
 package ru.job4j.ood.isp;
 
 public class Perforator implements Driller {
+
     @Override
     public void screw() {
         System.out.println("Описываем работу метода");

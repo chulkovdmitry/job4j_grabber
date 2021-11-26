@@ -21,4 +21,5 @@ public class Perforator implements Driller {
     public void illuminate() {
         System.out.println("Нет опции, глушим");
     }
+
 }

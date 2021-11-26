@@ -26,4 +26,5 @@ public class Moskvich implements Car {
     public void condition() {
         System.out.println("Кондиционера нет, поэтому глушим метод");
     }
+
 }

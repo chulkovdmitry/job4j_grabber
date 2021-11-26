@@ -5,6 +5,5 @@ import java.util.Map;
 
 public interface Parking {
     boolean park(Vehicle car);
-    boolean leave(Vehicle car);
     Map<LotType, List<Vehicle>> getCars();
 }

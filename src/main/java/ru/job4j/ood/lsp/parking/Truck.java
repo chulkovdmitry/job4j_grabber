@@ -1,30 +1,16 @@
 package ru.job4j.ood.lsp.parking;
 
 public class Truck implements Vehicle {
-    private final int size;
-    private LotType type;
+    private int size;
 
     public Truck(int size) {
         this.size = size;
-        this.type = LotType.TRUCK;
     }
 
-    @Override
     public int getSize() {
-        return size;
-    }
-
-    @Override
-    public LotType getLotType() {
-        return type;
-    }
-
-    @Override
-    public boolean setLotType(LotType type) {
-        if (this.type == type) {
-            return false;
+        if (size > 1) {
+            return size;
         }
-        this.type = type;
-        return true;
+        return 0;
     }
 }

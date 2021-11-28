@@ -2,6 +2,7 @@ package ru.job4j.ood.lsp.products;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ControllQuality {
     private List<Storage> storages;
@@ -26,6 +27,18 @@ public class ControllQuality {
             }
         }
         return rsl;
+    }
+
+    public void resort() {
+        List<Food> foods = storages.stream()
+                .flatMap(storage -> storage.getList().stream())
+                .collect(Collectors.toList());
+
+        for (Food food : foods) {
+            for (Storage storage : storages) {
+                storage.add(food, fresh(food));
+            }
+        }
     }
 
     public List<Storage> getStorages() {

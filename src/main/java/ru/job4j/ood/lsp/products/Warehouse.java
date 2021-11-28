@@ -16,7 +16,9 @@ public class Warehouse implements Storage {
 
     @Override
     public List<Food> getList() {
-        return foods;
+        List<Food> current = foods;
+        foods = new ArrayList<>();
+        return current;
     }
 
     @Override

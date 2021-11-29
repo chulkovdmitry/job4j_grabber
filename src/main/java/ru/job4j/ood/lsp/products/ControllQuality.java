@@ -37,8 +37,11 @@ public class ControllQuality {
         for (Food food : foods) {
             for (Storage storage : storages) {
                 storage.add(food, fresh(food));
+                storage.removeList();
             }
+            distribute(food);
         }
+
     }
 
     public List<Storage> getStorages() {

@@ -34,4 +34,9 @@ public class Shop implements Storage {
         }
         return false;
     }
+
+    @Override
+    public void removeList() {
+        foods.clear();
+    }
 }

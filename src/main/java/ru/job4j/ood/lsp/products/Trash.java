@@ -19,4 +19,9 @@ public class Trash implements Storage {
         foods.add(food);
         return true;
     }
+
+    @Override
+    public void removeList() {
+        foods.clear();
+    }
 }

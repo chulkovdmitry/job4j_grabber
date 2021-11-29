@@ -29,4 +29,9 @@ public class Warehouse implements Storage {
         }
         return false;
     }
+
+    @Override
+    public void removeList() {
+        foods.clear();
+    }
 }

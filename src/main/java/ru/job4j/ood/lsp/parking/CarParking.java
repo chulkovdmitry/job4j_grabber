@@ -1,39 +1,40 @@
 package ru.job4j.ood.lsp.parking;
 
-public class CarParking implements Parking {
-    private int parkingSpaceCar;
-    private int parkingSpaceTruck;
+import java.util.ArrayList;
+import java.util.List;
 
-    public CarParking(int parkingSpaceCar, int parkingSpaceTruck) {
-        this.parkingSpaceCar = parkingSpaceCar;
-        this.parkingSpaceTruck = parkingSpaceTruck;
+public class CarParking implements Parking {
+    private final int carLotsCapacity;
+    private final int truckLotsCapacity;
+    private final List<Vehicle> carLots;
+    private final List<Vehicle> truckLots;
+
+    public CarParking(int carLotsCapacity, int truckLotsCapacity) {
+        this.carLotsCapacity = carLotsCapacity;
+        this.truckLotsCapacity = truckLotsCapacity;
+        this.carLots = new ArrayList<>(carLotsCapacity);
+        this.truckLots = new ArrayList<>(truckLotsCapacity);
     }
 
     @Override
     public boolean park(Vehicle car) {
-        if (car.getSize() == 1) {
-            return parkingCar(car);
-        } else if (car.getSize() > 1) {
-            return parkingTruck(car);
-        }
-        return false;
-    }
-
-    private boolean parkingTruck(Vehicle car) {
-        if (parkingSpaceTruck >= 1) {
-            parkingSpaceTruck--;
-            return true;
-        } else if (parkingSpaceCar >= car.getSize()) {
-            parkingSpaceCar = parkingSpaceCar - car.getSize();
+        int freeCarLots = carLotsCapacity - carLots.size();
+        if (car.getSize() == 1 && freeCarLots >= car.getSize()) {
+            carLots.add(car);
             return true;
         }
-        return false;
-    }
-
-    private boolean parkingCar(Vehicle car) {
-        if (parkingSpaceCar >= car.getSize()) {
-            parkingSpaceCar--;
+        int freeTruckLots = truckLotsCapacity - truckLots.size();
+        if (car.getSize() > 1 && freeTruckLots > 0) {
+            truckLots.add(car);
             return true;
+        }
+        if (car.getSize() > 1 && freeTruckLots == 0) {
+            if (freeCarLots >= car.getSize()) {
+                for (int i = 0; i < car.getSize(); i++) {
+                    carLots.add(car);
+                }
+                return true;
+            }
         }
         return false;
     }

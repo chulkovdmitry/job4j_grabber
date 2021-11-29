@@ -3,6 +3,7 @@ package ru.job4j.ood.lsp.parking;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import java.util.List;
 
 public class CarParkingTest {
 
@@ -41,4 +42,47 @@ public class CarParkingTest {
         assertFalse(parking.park(truck));
     }
 
+    @Test
+    public void validTruckWhenNoCarLots() {
+        CarParking parking = new CarParking(0, 6);
+        Truck truck1 = new Truck(3);
+        Truck truck2 = new Truck(4);
+        parking.park(truck1);
+        parking.park(truck2);
+        assertEquals(parking.getFreeSpaceTruck(), 4);
+    }
+
+    @Test
+    public void validTrucksOnCarsSpacesWhenNoTruckLots() {
+        CarParking parking = new CarParking(10, 0);
+        Truck truck1 = new Truck(2);
+        Truck truck2 = new Truck(4);
+        parking.park(truck1);
+        parking.park(truck2);
+        assertEquals(parking.getFreeSpaceCar(), 4);
+    }
+
+    @Test
+    public void validTrucksAndCarOnCarsSpacesWhenNoTruckLots() {
+        CarParking parking = new CarParking(10, 0);
+        Truck truck1 = new Truck(3);
+        Truck truck2 = new Truck(5);
+        Car car = new Car();
+        parking.park(truck1);
+        parking.park(truck2);
+        parking.park(car);
+        assertEquals(parking.getFreeSpaceCar(), 1);
+    }
+
+    @Test
+    public void validTrucksAndCarOnBothSpacesWhenCarsAndTruckLots() {
+        CarParking parking = new CarParking(10, 1);
+        Truck truck1 = new Truck(3);
+        Truck truck2 = new Truck(5);
+        Car car = new Car();
+        parking.park(truck1);
+        parking.park(truck2);
+        parking.park(car);
+        assertEquals(parking.getFreeSpaceCar(), 4);
+    }
 }

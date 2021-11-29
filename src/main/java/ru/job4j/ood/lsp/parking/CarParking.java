@@ -38,4 +38,12 @@ public class CarParking implements Parking {
         }
         return false;
     }
+
+    public int getFreeSpaceCar() {
+        return carLotsCapacity - carLots.size();
+    }
+
+    public int getFreeSpaceTruck() {
+        return truckLotsCapacity - truckLots.size();
+    }
 }

@@ -1,6 +1,7 @@
 package ru.job4j.ood.lsp.products;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,15 +31,13 @@ public class ControllQuality {
     }
 
     public void resort() {
-        List<Food> foods = storages.stream()
-                .flatMap(storage -> storage.getList().stream())
-                .collect(Collectors.toList());
+        List<Food> listForResort = new ArrayList<>();
+        for (Storage storage : storages) {
+            listForResort.addAll(storage.getList());
+            storage.removeList();
+        }
 
-        for (Food food : foods) {
-            for (Storage storage : storages) {
-                storage.add(food, fresh(food));
-                storage.removeList();
-            }
+        for (Food food : listForResort) {
             distribute(food);
         }
 

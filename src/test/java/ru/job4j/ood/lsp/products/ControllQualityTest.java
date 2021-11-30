@@ -83,6 +83,6 @@ public class ControllQualityTest {
                         storages.get(0).getList().size(),
                         storages.get(1).getList().size(),
                         storages.get(2).getList().size()}),
-                Arrays.toString(new int[]{0, 0, 1}));
+                Arrays.toString(new int[]{0, 2, 2}));
     }
 }

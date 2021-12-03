@@ -26,7 +26,7 @@ public interface Menu {
         }
 
         public List<Item> getItemList() {
-            return itemList;
+            return List.copyOf(itemList);
         }
 
         @Override

@@ -33,33 +33,16 @@ public class MainMenu implements Menu {
     }
 
     private void print(Item item) {
-        System.out.println(item.getName());
+        StringBuilder strTabs = new StringBuilder();
+        strTabs.append(item.getName());
+        System.out.println(strTabs);
         for (Item itemChild : item.getItemList()) {
             print(itemChild);
         }
     }
 
-    private void console() {
-        Out out = new ItemsOut();
-    }
-
-    public void init(Scanner scanner) {
-        boolean run = true;
-        while (run) {
-            console();
-            System.out.println("Select: ");
-            String select = scanner.nextLine();
-            if (!select.equals("Exit")) {
-                System.out.println("Пользователь выбрал пункт меню: " + select);
-            } else {
-                run = false;
-            }
-        }
-    }
-
     public static void main(String[] args) {
         MainMenu menu = new MainMenu();
-        Scanner scanner = new Scanner(System.in);
         menu.add("Menu", new Item("Задача 1.", new DoAction()));
         menu.add("1.", new Item("--Задача 1.1.", new DoAction()));
         menu.add("1.", new Item("--Задача 1.2.", new DoAction()));
@@ -67,6 +50,7 @@ public class MainMenu implements Menu {
         menu.add("1.1.", new Item("----Задача 1.1.2.", new DoAction()));
         menu.add("Exit", new Item("Out", new DoAction()));
         menu.print();
-        menu.init(scanner);
+        ConsoleInput consoleInput = new ConsoleInput();
+        consoleInput.init();
     }
 }
